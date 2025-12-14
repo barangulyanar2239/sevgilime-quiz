@@ -1,0 +1,84 @@
+const questions = [
+    {
+        question: "Sen aslında nerelisin? (Aramızdaki küçük sır 😊)",
+        options: ["Yozgat", "Ankara", "Bursa"],
+        correctAnswerIndex: 0 
+    },
+    {
+        question: "En sevdiğim, en yakın arkadaşım kimdir?",
+        options: ["Ege", "Batu", "Burak"],
+        correctAnswerIndex: 1 
+    },
+    {
+        question: "Beni ne kadar seviyorsun? (Doğru cevabı bilmelisin! 😉)",
+        options: ["Çok", "Ortalama", "Az"],
+        correctAnswerIndex: 0 
+    }
+];
+
+let currentQuestionIndex = 0;
+const questionElement = document.getElementById('question');
+const optionButtons = document.querySelectorAll('.options .btn');
+const messageElement = document.getElementById('message');
+const quizBox = document.getElementById('quiz-box');
+
+function loadQuestion() {
+    if (currentQuestionIndex >= questions.length) {
+        showCompletionMessage();
+        return;
+    }
+
+    const currentQ = questions[currentQuestionIndex];
+    questionElement.textContent = currentQ.question;
+    messageElement.textContent = ''; 
+
+    optionButtons.forEach((button, index) => {
+        button.textContent = currentQ.options[index];
+        button.disabled = false; 
+        button.style.backgroundColor = '#ffc107'; 
+    });
+}
+
+function checkAnswer(selectedIndex) {
+    const currentQ = questions[currentQuestionIndex];
+
+    optionButtons.forEach(button => button.disabled = true);
+
+    if (selectedIndex === currentQ.correctAnswerIndex) {
+        messageElement.textContent = "🥳 Harika! Bildin! Hadi bir sonrakine geçelim.";
+        messageElement.className = 'correct';
+        optionButtons[selectedIndex].style.backgroundColor = 'lightgreen'; 
+
+        setTimeout(() => {
+            currentQuestionIndex++;
+            loadQuestion();
+        }, 2000);
+
+    } else {
+        messageElement.textContent = "😔 Üzgünüm, bu sefer bilemedin. Biraz daha düşün.";
+        messageElement.className = 'incorrect';
+        optionButtons[selectedIndex].style.backgroundColor = 'lightcoral'; 
+        
+        optionButtons[currentQ.correctAnswerIndex].style.backgroundColor = '#6495ED'; 
+
+        setTimeout(() => {
+            optionButtons.forEach(button => {
+                button.disabled = false;
+                button.style.backgroundColor = '#ffc107'; 
+            });
+            optionButtons[currentQ.correctAnswerIndex].style.backgroundColor = '#ffc107';
+            messageElement.textContent = '';
+        }, 3000);
+    }
+}
+
+function showCompletionMessage() {
+    quizBox.innerHTML = `
+        <h2>Tebrikler Canım Sevgilim!</h2>
+        <p style="font-size: 1.5em; color: #e91e63;">Tüm 3 soruyu başarıyla cevapladın. Bu, beni ne kadar iyi tanıdığını gösteriyor!</p>
+        <p>❤️ Seni çok seviyorum. ❤️</p>
+    `;
+    quizBox.style.padding = '50px';
+}
+
+loadQuestion();
