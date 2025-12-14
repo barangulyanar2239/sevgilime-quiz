@@ -10,7 +10,7 @@ const questions = [
         correctAnswerIndex: 1 
     },
     {
-        question: "Beni ne kadar seviyorsun? (Doğru cevabı bilmelisin! 😉)",
+        question: "Beni ne kadar seviyorsun? (SAKIN YALAN SÖYLEME😉)",
         options: ["Çok", "Ortalama", "Az"],
         correctAnswerIndex: 0 
     }
@@ -45,7 +45,7 @@ function checkAnswer(selectedIndex) {
     optionButtons.forEach(button => button.disabled = true);
 
     if (selectedIndex === currentQ.correctAnswerIndex) {
-        messageElement.textContent = "🥳 Harika! Bildin! Hadi bir sonrakine geçelim.";
+        messageElement.textContent = "🥳 SEN BİTANESİN YA.";
         messageElement.className = 'correct';
         optionButtons[selectedIndex].style.backgroundColor = 'lightgreen'; 
 
@@ -55,7 +55,7 @@ function checkAnswer(selectedIndex) {
         }, 2000);
 
     } else {
-        messageElement.textContent = "😔 Üzgünüm, bu sefer bilemedin. Biraz daha düşün.";
+        messageElement.textContent = "DÜZGÜN CEVAPLARMISIN biraz daha düşün.";
         messageElement.className = 'incorrect';
         optionButtons[selectedIndex].style.backgroundColor = 'lightcoral'; 
         
@@ -74,9 +74,9 @@ function checkAnswer(selectedIndex) {
 
 function showCompletionMessage() {
     quizBox.innerHTML = `
-        <h2>Tebrikler Canım Sevgilim!</h2>
-        <p style="font-size: 1.5em; color: #e91e63;">Tüm 3 soruyu başarıyla cevapladın. Bu, beni ne kadar iyi tanıdığını gösteriyor!</p>
-        <p>❤️ Seni çok seviyorum. ❤️</p>
+        <h2>Tebrikler Aslım!</h2>
+        <p style="font-size: 1.5em; color: #e91e63;">Tüm 3 soruyu başarıyla cevapladın. Bu, ASLInda beni ne kadar sevdiğini gösteriyor!</p>
+        <p>❤️ Seni çok seviyorum.(ŞIMARDIM) ❤️</p>
     `;
     quizBox.style.padding = '50px';
 }
